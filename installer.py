@@ -3,7 +3,7 @@ import _babase
 import os
 
 # LINK RAW DO MOD → substitua pelo link RAW do GitHub
-url = "https://raw.githubusercontent.com/SEU-USUARIO/bombsquad-new-bombs-mod/main/new_bombs_plus.py"
+url = "https://raw.githubusercontent.com/Nickeangelo/bombsquad-new-bombs-mod/main/new_bombs_plus.py"
 
 # Diretório do BombSquad Pro
 user_dir = _babase.env().get("python_directory_user")
