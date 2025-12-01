@@ -1,0 +1,8 @@
+{
+    "name": "New Bombs Plus",
+    "description": "Adiciona novas bombas especiais ao BombSquad, incluindo bombas gravitacionais, nucleares e variantes.",
+    "author": "Nickeangelo",
+    "version": "1.0",
+    "supported_api": 7,
+    "python_files": ["new_bombs_plus.py"]
+}
