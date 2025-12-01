@@ -1,27 +1,38 @@
-import urllib.request
-import _babase
+# Installer for New Bombs Plus mod
+
 import os
+import shutil
+import _babase
 
-# LINK RAW do mod no GitHub
-url = "URL_RAW_DO_ARQUIVO_AQUI"
 
-# Diretório do BombSquad Pro
-user_dir = _babase.env().get("python_directory")
-mods_path = os.path.join(user_dir, "mods")
-mod_file_path = os.path.join(mods_path, "new_bombs_plus.py")
+def install():
+    print("[New Bombs Plus] Instalando mod...")
 
-# Criar pasta mods se não existir
-if not os.path.isdir(mods_path):
-    os.makedirs(mods_path)
+    # Pasta destino onde o BombSquad guarda scripts do usuário
+    user_path = _babase.env().get("python_directory_user")
 
-# Baixar arquivo temporário
-temp_file, _ = urllib.request.urlretrieve(url)
+    if not user_path:
+        raise RuntimeError("Não foi possível localizar python_directory_user")
 
-# Ler e copiar para o local final
-with open(temp_file, "r", encoding="utf-8") as downloaded:
-    code = downloaded.read()
+    # Caminho final do mod
+    mod_dir = os.path.join(user_path, "new_bombs_plus")
 
-with open(mod_file_path, "w", encoding="utf-8") as modfile:
-    modfile.write(code)
+    # Pasta onde o GitHub armazena os arquivos deste plugin
+    src_dir = os.path.join(os.path.dirname(__file__), "new_bombs_plus")
 
-print("SUCCESS — Mod instalado!")
+    # Verifica se a pasta existe no plugin
+    if not os.path.isdir(src_dir):
+        raise RuntimeError("Pasta 'new_bombs_plus' não encontrada no plugin.")
+
+    # Remove instalação anterior
+    if os.path.exists(mod_dir):
+        shutil.rmtree(mod_dir)
+
+    # Copia nova versão
+    shutil.copytree(src_dir, mod_dir)
+
+    print("[New Bombs Plus] Mod instalado com sucesso!")
+
+
+def on_app_launch():
+    install()
